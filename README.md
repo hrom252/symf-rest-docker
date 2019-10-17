@@ -10,14 +10,17 @@ REST API с авторизацией на базе OAuth
 4) накатываем миграции php bin/console doctrine:migrations:migrate
 5) создаем юзера bin/console fos:user:create test_user
 5) создаем клиента POST JSON http://127.0.0.1:8080/createClient {
-	"grant-type": "password",
-	"redirect-uri": "test.uri"
-}
+		"grant-type": "password",
+		"redirect-uri": "test.uri"
+	}
+  получаем в ответ client_id + client_secret
 6) получаем токен POST BODY http://127.0.0.1:8080/oauth/v2/token {
     "grant-type": "password",
     "redirect-uri": "test.uri",
     "username": "test_user",
     "password": "test"
+    "client_id": "xxx",
+    "client_secret": "xxx"
   }
   Ответ в виде: {"access_token":"NWRkNGEyZjY3NTBiNGM4MThiYjRmZTcyNTgwNTFkNzgzY2UyOGJmZGJjNTUwNjM4ZjYyODMzNjc1ZjhmZjlkMg","expires_in":86400,"token_type":"bearer","scope":null,"refresh_token":"MDRjNGE4ZTNhMDc0MTJiZDI5OGFmODdlN2Q2ZTU1NGFhYzY5MGNmYzY0ZWRjNzY3MTJlNWUxNzhmNjUzNGUwZg"}
 7) Получаем/Создаем/Редактируем категории по путям:
